@@ -1,7 +1,7 @@
 const tree = (function() {
 
   return {
-    create,
+    add,
     search,
     insert,
     del,
@@ -9,7 +9,7 @@ const tree = (function() {
     max
   }
 
-  function create(item, parent=false) {
+  function add(item, parent=false) {
     const node = {};
     node.left = node.right = null;
     node.item = item;
@@ -22,7 +22,7 @@ const tree = (function() {
     let root = tree;
     let parent;
 
-    while(root !== undefined || root.item !== item) {
+    while(root !== null && root.item !== item) {
       parent = root;
       root.item > item ? root = root.left : root = root.right;
     }
@@ -31,7 +31,7 @@ const tree = (function() {
   };
 
   function insert(tree, item) {
-    const subTree = this.create(item);
+    const subTree = this.add(item);
     const leaf = this.search(tree, item);
 
     leaf.parent.item > item ?
@@ -85,4 +85,4 @@ const tree = (function() {
 
 })();
 
-module.exports = tree; 
+module.exports = tree;
