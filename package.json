@@ -1,0 +1,26 @@
+{
+  "name": "trees",
+  "version": "1.0.0",
+  "description": "A repo where I will implement different trees in javascript. As of now, it consists of binary search trees without any kind of mechanisms for balancing.",
+  "main": "tree.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha ./tests/trees.spec.js -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdblr/trees.git"
+  },
+  "author": "Max Dobler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdblr/trees/issues"
+  },
+  "homepage": "https://github.com/mdblr/trees#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
