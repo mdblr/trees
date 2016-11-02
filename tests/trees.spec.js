@@ -36,9 +36,9 @@ describe('create a tree with two leaves', () => {
     expect(root.right.item).to.equal(4);
   })
 
-  it('should correctly insert new nodes based on values', () => {
+  it('should correctly insert new nodes and ignore duplicates', () => {
     const root = tree.add(10);
-    const values = [4,14,8,20,16,6,2,18,0,12];
+    const values = [4,14,8,20,16,6,2,18,14,0,12];
     const sorted = [0,2,4,6,8,10,12,14,16,18,20];
     const result = [];
 
@@ -57,8 +57,8 @@ describe('create a tree with two leaves', () => {
     }(root, result));
 
     expect(result).to.eql(sorted);
-  })
-})
+  });
+});
 //'del'
 //'min'
 //'max'
