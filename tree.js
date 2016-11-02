@@ -31,12 +31,14 @@ const tree = (function() {
   };
 
   function insert(tree, item) {
-    const subTree = this.add(item);
-    const leaf = this.search(tree, item);
 
-    leaf.parent.item > item ?
-    leaf.parent.left = subTree :
-    leaf.parent.right = subTree ;
+    const branch = this.search(tree, item);
+    if (branch.root) return false;
+
+    let subTree = this.add(item);
+    branch.parent.item > item ?
+    branch.parent.left = subTree :
+    branch.parent.right = subTree ;
   };
 
   function del(tree, item){
