@@ -4,15 +4,10 @@ const expect = require('chai').expect;
 const tree = require('../tree.js');
 
 describe('require tree', () => {
-  it('should return an object', () => {
-    expect(tree).to.be.an('object');
-  });
-
   it('should return methods', () => {
-    expect(tree).to.have.all.keys('add','search','insert','del','min','max');
+    expect(tree).to.have.all.keys('add','search','insert','del','min','max', 'countNodes');
   });
 });
-
 
 //'add'
 
@@ -24,7 +19,9 @@ describe('create a tree root', () => {
     expect(root.right).to.be.null;
   });
 });
+
 //'search'
+
 //'insert'
 
 describe('create a tree with two leaves', () => {
@@ -54,11 +51,54 @@ describe('create a tree with two leaves', () => {
         traverse(tree.right, arr);
       }
       return arr;
-    }(root, result));
+    })(root, result);
 
     expect(result).to.eql(sorted);
   });
 });
 //'del'
 //'min'
+
+describe('testing min function', () => {
+  it('should return 0', () => {
+    const root = tree.add(15);
+    const values = [4,14,9,8,20,16,6,2,18,51,14,0,12,34];
+
+    for (let n of values) {
+      tree.insert(root, n);
+    }
+
+    const result = tree.min(root);
+    expect(result.node.item).to.equal(0);
+  });
+});
+
 //'max'
+describe('testing max function', () => {
+  it('should return 51', () => {
+    const root = tree.add(15);
+    const values = [4,14,9,8,20,16,6,2,18,51,14,0,12,34];
+
+    for (let n of values) {
+      tree.insert(root, n);
+    }
+
+    const result = tree.max(root);
+    expect(result.node.item).to.equal(51);
+  });
+});
+
+//countNodes
+describe('countNodes', () => {
+  it('should return 15', () => {
+    const root = tree.add(15);
+    const values = [4,14,9,8,20,16,6,2,18,51,0,12,34];
+
+    for (let n of values) {
+      tree.insert(root, n);
+    }
+
+    const result = tree.countNodes(root);
+    expect(result).to.equal(values.length + 1)
+  })
+});
