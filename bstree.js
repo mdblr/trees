@@ -6,7 +6,8 @@ const tree = (function() {
     insert,
     del,
     min,
-    max
+    max,
+    countNodes
   }
 
   function add(item, parent=false) {
@@ -73,16 +74,19 @@ const tree = (function() {
     }
   }
 
-  function min(tree, parent) {
-    let node = tree;
-
+  function min(root, parent) {
+    let node = root;
     return node.left === null ? { node, parent } : min(node.left, node);
   }
 
-  function max(tree, parent) {
-    let node = tree;
-
+  function max(root, parent) {
+    let node = root;
     return node.right === null ? { node, parent } : max(node.right, node);
+  }
+
+  function countNodes(root) {
+    if (!root) return 0;
+    return countNodes(root.left) + countNodes(root.right) + 1;
   }
 
 })();
