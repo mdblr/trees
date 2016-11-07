@@ -10,18 +10,17 @@ const tree = (function() {
     countNodes
   }
 
-  function add(item, parent=false) {
+  function add(item) {
     const node = {};
     node.left = node.right = null;
     node.item = item;
-    if (parent) node.parent = parent;
 
     return node;
   };
 
   function search(tree, item) {
-    let root = tree;
-    let parent;
+    let root = tree,
+        parent = null;
 
     while(root !== null && root.item !== item) {
       parent = root;
@@ -51,7 +50,7 @@ const tree = (function() {
     let right = subTree.root.right !== null ? 1 : 0;
 
     if (left + right < 1) {
-      subTree.parent.item > node.item ?
+      subTree.parent.item > item ?
       subTree.parent.left = null :
       subTree.parent.right = null ;
     }
@@ -74,14 +73,28 @@ const tree = (function() {
     }
   }
 
-  function min(root, parent) {
-    let node = root;
-    return node.left === null ? { node, parent } : min(node.left, node);
+  function min(root) {
+    let node = root,
+        parent = null;
+
+    while (node.left !== null) {
+      parent = node;
+      node = node.left;
+    }
+
+    return { node, parent };
   }
 
-  function max(root, parent) {
-    let node = root;
-    return node.right === null ? { node, parent } : max(node.right, node);
+  function max(root) {
+    let node = root,
+        parent = null;
+
+    while (node.right !== null) {
+      parent = node;
+      node = node.right;
+    }
+
+    return { node, parent };
   }
 
   function countNodes(root) {
