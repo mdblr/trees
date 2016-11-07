@@ -44,21 +44,21 @@ const tree = (function() {
   function del(tree, item){
     if (!tree) return false;
 
-    const subTree = this.search(tree, item);
+    const child = this.search(tree, item);
 
-    let left = subTree.root.left !== null ? 1 : 0;
-    let right = subTree.root.right !== null ? 1 : 0;
+    let left = child.root.left !== null ? 1 : 0;
+    let right = child.root.right !== null ? 1 : 0;
 
     if (left + right < 1) {
-      subTree.parent.item > item ?
-      subTree.parent.left = null :
-      subTree.parent.right = null ;
+      child.parent.item > item ?
+      child.parent.left = null :
+      child.parent.right = null ;
     }
     else if (left + right < 2) {
-      const temp = left > 0 ? subTree.left : subTree.right ;
-      subTree.parent.item > subTree.item ?
-      subTree.parent.left = temp :
-      subTree.parent.right = temp ;
+      const grandchild = left > 0 ? child.root.left : child.root.right ;
+      child.parent.item > child.root.item ?
+      child.parent.left = grandchild :
+      child.parent.right = grandchild ;
     }
     else {
       const min = this.min(subTree.right, subTree);
