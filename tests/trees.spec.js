@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const tree = require('../tree.js');
+const tree = require('../bstree.js');
 
 describe('require tree', () => {
   it('should return methods', () => {
@@ -57,6 +57,40 @@ describe('create a tree with two leaves', () => {
   });
 });
 //'del'
+
+describe('testing delete function', () => {
+  const root = tree.add(15);
+  const values = [4,14,9,8,20,16,6,2,18,51,0,12,34];
+
+  for (let n of values) {
+    tree.insert(root, n);
+  }
+
+  it('should delete delete a leaf', ()=> {
+    let min = tree.min(root);
+    tree.del(root, min.node.item);
+    min = tree.min(root);
+    expect(min.node.item).to.equal(2);
+  });
+
+  it('should delete a branch with one child', () => {
+    tree.del(root, 8);
+    let nine = tree.search(root, 9);
+    expect(nine.root.left.item).to.equal(6);
+  });
+
+  it('should delete a branch with two children', () => {
+    tree.del(root, 9);
+    const twelve = tree.search(12);
+    expect(twelve.left).to.equal(8);
+  });
+
+  it('should delete the root', () => {
+    tree.del(root, root.item);
+    expect(root.item).to.equal(18);
+  });
+
+});
 //'min'
 
 describe('testing min function', () => {
