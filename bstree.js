@@ -46,6 +46,8 @@ const tree = (function() {
 
     const child = this.search(tree, item);
 
+    if (child.root === null) return false;
+
     let left = child.root.left !== null ? 1 : 0;
     let right = child.root.right !== null ? 1 : 0;
 
@@ -62,16 +64,19 @@ const tree = (function() {
     }
     else {
       const min = this.min(child.root.right, child.root);
-      child.root.item = min.node.item;
 
-      if (min.left || min.right) {
+      if (min.node.left || min.node.right) {
+        let item = min.node.item;
         this.del(tree, min.node.item);
+        child.root.item = min.node.item;
       }
       else if (min.parent.item === child.root.item) {
         child.root.right = null;
+        child.root.item = min.node.item;
       }
       else {
-        min.parent.left = null; 
+        child.root.item = min.node.item;
+        min.parent.left = null;
       }
     }
   }
