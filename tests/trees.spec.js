@@ -85,9 +85,20 @@ describe('testing delete function', () => {
     expect(twelve.root.left.item).to.equal(6);
   });
 
+  it('should not delete a null branch', () => {
+    tree.del(root, 9);
+    const twelve = tree.search(root, 12);
+    expect(twelve.root.right).to.be.null;
+  });
+
   it('should delete the root', () => {
     tree.del(root, root.item);
     expect(root.item).to.equal(16);
+  });
+
+  it('should delete the root 2', () => {
+    let twenty = tree.search(root, 20);
+    expect(twenty.root.left.item).to.equal(18);
   });
 
 });
