@@ -81,13 +81,13 @@ describe('testing delete function', () => {
 
   it('should delete a branch with two children', () => {
     tree.del(root, 9);
-    const twelve = tree.search(12);
-    expect(twelve.left).to.equal(8);
+    const twelve = tree.search(root, 12);
+    expect(twelve.root.left.item).to.equal(6);
   });
 
   it('should delete the root', () => {
     tree.del(root, root.item);
-    expect(root.item).to.equal(18);
+    expect(root.item).to.equal(16);
   });
 
 });
@@ -104,7 +104,22 @@ describe('testing min function', () => {
 
     const result = tree.min(root);
     expect(result.node.item).to.equal(0);
+
   });
+
+  it('should return parent that is not null', () => {
+    const root = tree.add(15);
+    const values = [4,14,9,8,20,16,6,2,18,51,14,0,12,34];
+
+    for (let n of values) {
+      tree.insert(root, n);
+    }
+
+    const result = tree.min(root);
+    expect(result.parent).to.not.be.null;
+  });
+
+
 });
 
 //'max'
