@@ -61,21 +61,23 @@ const tree = (function() {
       child.parent.right = grandchild ;
     }
     else {
-      const min = this.min(subTree.right, subTree);
-      if (subTree.parent.item > subTree.item) {
-        subTree.parent.left.item = min.node.item;
-        min.parent.left = null;
+      const min = this.min(child.root.right, child.root);
+      child.root.item = min.node.item;
+
+      if (min.left || min.right) {
+        this.del(tree, min.node.item);
+      }
+      else if (min.parent.item === child.root.item) {
+        child.root.right = null;
       }
       else {
-        subTree.parent.right = min.node.item ;
-        min.parent.right = null;
+        min.parent.left = null; 
       }
     }
   }
 
-  function min(root) {
-    let node = root,
-        parent = null;
+  function min(root, parent=null) {
+    let node = root;
 
     while (node.left !== null) {
       parent = node;
