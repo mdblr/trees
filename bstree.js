@@ -65,7 +65,7 @@ const tree = (function() {
     else {
       const min = this.min(child.root.right, child.root);
 
-      if (min.node.left || min.node.right) {
+      if (min.node.right) {
         this.del(tree, min.node.item);
         child.root.item = min.node.item;
       }
